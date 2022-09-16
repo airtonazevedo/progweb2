@@ -10,8 +10,9 @@ function App() {
     const load = async () => {
       setLoad(true)
       try {
-        await api.post('auth/validate')
+        const res = await api.post('auth/validate')
         authState.logged = true
+        authState.type = res.data.type
       } catch {
         authState.logged = false
       }

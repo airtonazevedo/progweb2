@@ -6,10 +6,9 @@ import Spinner from "react-bootstrap/Spinner";
 import { api } from "../service/api";
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
-import { authState } from "../store/auth";
 
-export function Login() {
-  const history = useHistory();
+export function NovoProduto() {
+  const history = useHistory()
   const [error, setError] = useState("");
   const [load, setLoad] = useState(false);
   return (
@@ -17,37 +16,38 @@ export function Login() {
       <Form
         onSubmit={async (e) => {
           e.preventDefault();
-          setLoad(true);
+          setLoad(true)
           const formData = new FormData(e.target);
           const body = {};
           formData.forEach((value, key) => (body[key] = value));
           try {
-            const res = await api.post("auth/signin", body);
-           authState.logged = true;
-            authState.type = res.data.type
+            await api.post("auth/signup", body);
+            alert('Conta criada com sucesso, faça login')
+            history.replace('/login')
           } catch (e) {
             setError(e.response.data);
           }
-          setLoad(false);
+          setLoad(false)
         }}
       >
         <Form.Group className="mb-3">
-          <Form.Label>Email</Form.Label>
-          <Form.Control name="email" type="email" placeholder="Email" />
+          <Form.Label>Nome</Form.Label>
+          <Form.Control name="nome" type="name" placeholder="nome" />
         </Form.Group>
+
         <Form.Group className="mb-3">
-          <Form.Label>Senha</Form.Label>
-          <Form.Control name="senha" type="password" placeholder="Senha" />
+          <Form.Label>Preço</Form.Label>
+          <Form.Control name="preco" type="number" placeholder="preço" />
         </Form.Group>
-        <Button
-          disabled={load}
-          variant="primary"
-          type="submit"
-          className="mb-3"
-        >
-          Entrar
-        </Button>{" "}
-        {load && <Spinner animation="border" />}
+
+        <Form.Group className="mb-3">
+          <Form.Label>Estoque</Form.Label>
+          <Form.Control name="estoque" type="number" placeholder="estoque" />
+        </Form.Group>
+
+        <Button disabled={load} variant="primary" type="submit" className="mb-3">
+          Salvar 
+        </Button> {load && <Spinner animation="border" />}
         {!!error && (
           <Alert variant={"danger"} dismissible onClose={() => setError("")}>
             {error}

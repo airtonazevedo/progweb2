@@ -23,7 +23,7 @@ routes.post('/auth/signin', async (req, res) => {
       if (result) {
         req.session.uid = user.id;
         req.session.userType = user.tipoUsuarioId
-        return res.send({id:user.id, tipo: user.tipoUsuarioId});
+        return res.send({id:user.id, type: user.tipoUsuarioId});
       } 
     } 
     throw 'Email ou senha inválidos'
@@ -62,7 +62,8 @@ routes.post('/auth/signup', async (req, res) => {
 })
 routes.post('/auth/validate', async (req, res) => {
   if (!!req.session.uid) {
-    return res.send({ok:true})
+    const user = await Usuario.findOne({ where: { id: req.session.uid } });
+    return res.send({id:user.id, type: user.tipoUsuarioId});
   } else {
     return res.status(400).send({ok:false})
   }
