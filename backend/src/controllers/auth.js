@@ -3,8 +3,6 @@ const yup = require('yup')
 const { Usuario } = require('../models/index')
 const bcrypt = require('bcryptjs');
 const routes = express.Router();
-
-const saltRounds = 10;
 routes.post('/auth/signin', async (req, res) => {
 
   try {
@@ -47,7 +45,7 @@ routes.post('/auth/signup', async (req, res) => {
     
 
     await schema.validate(req.body);
-    const hash = await bcrypt.hash(req.body.senha, saltRounds)
+    const hash = await bcrypt.hash(req.body.senha, 10)
     await Usuario.create({nome: req.body.nome, email: req.body.email, senha: hash, tipoUsuarioId: 1});
     
     return res.status(201).send("Conta criada");

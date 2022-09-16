@@ -32,7 +32,7 @@ export function Appbar() {
               </LinkContainer>
             )}
             {authSnap.logged && authSnap.type === 2 && (
-              <LinkContainer to="/cart">
+              <LinkContainer to="/admin/novo">
                 <Nav.Link>Novo admin</Nav.Link>
               </LinkContainer>
             )}

@@ -7,7 +7,7 @@ import { api } from "../service/api";
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
 
-export function SignUp() {
+export function NovoAdmin() {
   const history = useHistory()
   const [error, setError] = useState("");
   const [load, setLoad] = useState(false);
@@ -22,9 +22,9 @@ export function SignUp() {
           const body = {};
           formData.forEach((value, key) => (body[key] = value));
           try {
-            await api.post("auth/signup", body);
-            alert('Conta criada com sucesso, faça login')
-            history.replace('/login')
+            await api.post("usuario/novo", body);
+            alert('Conta criada com sucesso!')
+            history.replace('/')
           } catch (e) {
             setError(e.response.data);
           }

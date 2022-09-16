@@ -9,6 +9,7 @@ import { useSnapshot } from "valtio";
 import { Appbar } from "../components/Appbar";
 import { Home } from "../pages/Home";
 import { Login } from "../pages/Login";
+import { NovoAdmin } from "../pages/NovoAdmin";
 import { NovoProduto } from "../pages/NovoProduto";
 import { SignUp } from "../pages/SignUp";
 import { authState } from "../store/auth";
@@ -65,6 +66,9 @@ export function AppRoutes() {
           </ProtectedRoute>
           <ProtectedRoute routeType={"admin"} path="/produto/novo">
             <NovoProduto />
+          </ProtectedRoute>
+          <ProtectedRoute routeType={"admin"} path="/admin/novo">
+            <NovoAdmin />
           </ProtectedRoute>
           <Route path="/">
             <Home />
