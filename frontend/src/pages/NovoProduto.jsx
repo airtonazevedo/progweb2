@@ -20,10 +20,11 @@ export function NovoProduto() {
           const formData = new FormData(e.target);
           const body = {};
           formData.forEach((value, key) => (body[key] = value));
+          console.log(body)
           try {
-            await api.post("auth/signup", body);
-            alert('Conta criada com sucesso, faça login')
-            history.replace('/login')
+            await api.post("produto/novo", body);
+            alert('Produto adicionado!')
+            history.replace('/')
           } catch (e) {
             setError(e.response.data);
           }
@@ -37,7 +38,7 @@ export function NovoProduto() {
 
         <Form.Group className="mb-3">
           <Form.Label>Preço</Form.Label>
-          <Form.Control name="preco" type="number" placeholder="preço" />
+          <Form.Control step="any" name="preco" type="number" placeholder="preço" />
         </Form.Group>
 
         <Form.Group className="mb-3">
