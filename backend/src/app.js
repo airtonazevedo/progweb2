@@ -6,6 +6,7 @@ const authController = require("./controllers/auth");
 const app = express();
 const port = 3333;
 const publicRoutes = ["auth", "produtos"];
+const adminRoutes = ["produto/novo"];
 app.use(express.json());
 app.use(
   cors({
@@ -22,11 +23,17 @@ app.use(
 );
 app.use((req, res, next) => {
   if (publicRoutes.some((pr) => req.url.includes(pr))) {
-    next();
+    return next();
   } else if (req.session.uid) {
-    next();
+    if (adminRoutes.some((pr) => req.url.includes(pr))) {
+      if (req.session.userType === 2) {
+        return next();
+      }
+      return res.status(401).send("Não autorizado");
+    }
+    return next();
   } else {
-    res.status(401).send("Não autorizado");
+    return res.status(401).send("Não autorizado");
   }
 });
 app.use(produtosController);
