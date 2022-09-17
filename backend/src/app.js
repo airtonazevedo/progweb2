@@ -4,6 +4,7 @@ const cors = require("cors");
 const produtosController = require("./controllers/produtos");
 const authController = require("./controllers/auth");
 const usuarioController = require("./controllers/user");
+const compraController = require("./controllers/compra");
 const app = express();
 const port = 3333;
 const publicRoutes = ["auth", "produtos"];
@@ -40,6 +41,7 @@ app.use((req, res, next) => {
 app.use(produtosController);
 app.use(authController);
 app.use(usuarioController);
+app.use(compraController);
 app.listen(port, () => {
   console.log(`app rodando na porta ${port}`);
 });

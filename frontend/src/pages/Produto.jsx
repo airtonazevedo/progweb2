@@ -9,10 +9,8 @@ import ButtonGroup from "react-bootstrap/ButtonGroup";
 import { useState } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import { useSnapshot } from "valtio";
-import { authState } from "../store/auth";
 import { cartState } from "../store/cart";
 export function Produto() {
-  const authSnap = useSnapshot(authState);
   const cartSnap = useSnapshot(cartState);
   const [p, setP] = useState(null);
   const [quantidade, setQuantidade] = useState(1);
@@ -77,10 +75,10 @@ export function Produto() {
         <Button
           onClick={() => {
             const cartCopy = [...cartSnap.produtos];
-            const index = cartCopy.findIndex(i => i.id === id)
+            const index = cartCopy.findIndex((i) => i.id === id);
             if (index !== -1) {
               cartCopy.splice(index, 1);
-              cartState.produtos = [...cartCopy]
+              cartState.produtos = [...cartCopy];
             }
           }}
           variant="danger"
@@ -90,12 +88,8 @@ export function Produto() {
       ) : (
         <Button
           onClick={() => {
-            if (authSnap.logged) {
-              cartState.produtos = [...cartSnap.produtos, {...p, quantidade}]
-              history.push("/cart");
-            } else {
-              history.push("/login");
-            }
+            cartState.produtos = [...cartSnap.produtos, { ...p, quantidade }];
+            history.push("/cart");
           }}
           variant="primary"
         >

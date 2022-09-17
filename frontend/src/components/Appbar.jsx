@@ -9,7 +9,7 @@ import { authState } from "../store/auth";
 import { cartState } from "../store/cart";
 export function Appbar() {
   const authSnap = useSnapshot(authState);
-  const history = useHistory()
+  const history = useHistory();
   return (
     <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
       <Container>
@@ -22,11 +22,9 @@ export function Appbar() {
             <LinkContainer to="/sobre">
               <Nav.Link>Sobre</Nav.Link>
             </LinkContainer>
-            {authSnap.logged && authSnap.type === 1 && (
-              <LinkContainer to="/cart">
-                <Nav.Link>Meu Carrinho</Nav.Link>
-              </LinkContainer>
-            )}
+            <LinkContainer to="/cart">
+              <Nav.Link>Meu Carrinho</Nav.Link>
+            </LinkContainer>
             {authSnap.logged && authSnap.type === 2 && (
               <LinkContainer to="/produto/novo">
                 <Nav.Link>Novo produto</Nav.Link>
@@ -42,11 +40,11 @@ export function Appbar() {
             {authSnap.logged ? (
               <Nav.Link
                 onClick={async () => {
-                  await api.post('auth/logout')
-                  authState.logged = false
-                  authState.type = 0
-                  cartState.produtos = []
-                  history.replace('/')
+                  await api.post("auth/logout");
+                  authState.logged = false;
+                  authState.type = 0;
+                  cartState.produtos = [];
+                  history.replace("/");
                 }}
               >
                 Logout

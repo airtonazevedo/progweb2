@@ -63,15 +63,15 @@ export function AppRoutes() {
           <ProtectedRoute routeType={"public"} path="/login">
             <Login />
           </ProtectedRoute>
-          <ProtectedRoute routeType={"client"} path="/cart">
-          <Carrinho />
-          </ProtectedRoute>
           <ProtectedRoute routeType={"admin"} path="/produto/novo">
             <NovoProduto />
           </ProtectedRoute>
           <ProtectedRoute routeType={"admin"} path="/admin/novo">
             <NovoAdmin />
           </ProtectedRoute>
+          <Route path="/cart">
+            <Carrinho />
+          </Route>
           <Route path="/produto/:id">
             <Produto />
           </Route>
