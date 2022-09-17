@@ -2,6 +2,7 @@ const express = require("express");
 const yup = require("yup");
 const { Produto } = require("../models/index");
 const routes = express.Router();
+const { Op } = require("sequelize");
 
 routes.post("/produto/novo", async (req, res) => {
   try {
@@ -24,13 +25,22 @@ routes.post("/produto/novo", async (req, res) => {
 });
 
 routes.get("/produtos", async (req, res) => {
-  console.log(Produto);
-  await Produto.create({
-    nome: "SSD 512",
-    preco: 543.0,
-    estoque: 5,
+  let search = req.query.search
+  let offset = 0
+  if (!search)
+    search = ''
+  if (req.query.offset)
+    offset = Number(req.query.offset)
+  const produtos = await Produto.findAndCountAll({
+    where: {
+      nome: {
+        [Op.like]: `%${search}%`
+      }
+    },
+    offset: offset,
+    limit: 10
   });
-  res.send("produtos");
+  res.send(produtos);
 });
 
 module.exports = routes;
