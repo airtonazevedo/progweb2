@@ -75,6 +75,9 @@ export function AppRoutes() {
           <Route path="/produto/:id">
             <Produto />
           </Route>
+          <Route path="/sobre">
+            <h1>Site para comprar o que quiser!</h1>
+          </Route>
           <Route path="/">
             <Home />
           </Route>

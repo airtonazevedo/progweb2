@@ -26,7 +26,6 @@ export function Produto() {
     };
     loading();
   }, [id]);
-
   return (
     <Container fluid={"md"} className="mt-4">
       <Table bordered hover>
@@ -71,11 +70,11 @@ export function Produto() {
         </ButtonGroup>
       )}
       <br></br>
-      {cartSnap.produtos.some((i) => i.id === id) ? (
+      {cartSnap.produtos.some((i) => i.id.toString() === id) ? (
         <Button
           onClick={() => {
             const cartCopy = [...cartSnap.produtos];
-            const index = cartCopy.findIndex((i) => i.id === id);
+            const index = cartCopy.findIndex((i) => i.id.toString() === id);
             if (index !== -1) {
               cartCopy.splice(index, 1);
               cartState.produtos = [...cartCopy];
