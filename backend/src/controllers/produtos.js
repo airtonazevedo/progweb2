@@ -43,4 +43,10 @@ routes.get("/produtos", async (req, res) => {
   res.send(produtos);
 });
 
+
+routes.get("/produtos/:id", async (req, res) => {
+  const produto = await Produto.findByPk(req.params.id);
+  res.send(produto);
+});
+
 module.exports = routes;

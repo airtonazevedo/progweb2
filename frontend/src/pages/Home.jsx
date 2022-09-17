@@ -7,6 +7,7 @@ import Spinner from "react-bootstrap/Spinner";
 import Button from "react-bootstrap/Button";
 import ButtonGroup from "react-bootstrap/ButtonGroup";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 export function Home() {
   const [produtos, setProdutos] = useState({
     count: 0,
@@ -50,6 +51,7 @@ export function Home() {
             <th>Nome</th>
             <th>Preço</th>
             <th>Estoque</th>
+            <th>-</th>
           </tr>
         </thead>
         <tbody>
@@ -59,6 +61,7 @@ export function Home() {
               <td>{p.nome}</td>
               <td>{p.preco}</td>
               <td>{p.estoque}</td>
+              <td><Link to={`/produto/${p.id}`} >{'Ver detalhes'}</Link></td>
             </tr>
           ))}
         </tbody>

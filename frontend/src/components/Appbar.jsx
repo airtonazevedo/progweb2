@@ -6,6 +6,7 @@ import { useHistory } from "react-router-dom";
 import { useSnapshot } from "valtio";
 import { api } from "../service/api";
 import { authState } from "../store/auth";
+import { cartState } from "../store/cart";
 export function Appbar() {
   const authSnap = useSnapshot(authState);
   const history = useHistory()
@@ -44,7 +45,7 @@ export function Appbar() {
                   await api.post('auth/logout')
                   authState.logged = false
                   authState.type = 0
-                  
+                  cartState.produtos = []
                   history.replace('/')
                 }}
               >

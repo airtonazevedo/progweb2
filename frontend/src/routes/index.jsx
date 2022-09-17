@@ -7,10 +7,12 @@ import {
 } from "react-router-dom";
 import { useSnapshot } from "valtio";
 import { Appbar } from "../components/Appbar";
+import { Carrinho } from "../pages/Carrinho";
 import { Home } from "../pages/Home";
 import { Login } from "../pages/Login";
 import { NovoAdmin } from "../pages/NovoAdmin";
 import { NovoProduto } from "../pages/NovoProduto";
+import { Produto } from "../pages/Produto";
 import { SignUp } from "../pages/SignUp";
 import { authState } from "../store/auth";
 
@@ -62,7 +64,7 @@ export function AppRoutes() {
             <Login />
           </ProtectedRoute>
           <ProtectedRoute routeType={"client"} path="/cart">
-            <h1>cart</h1>
+          <Carrinho />
           </ProtectedRoute>
           <ProtectedRoute routeType={"admin"} path="/produto/novo">
             <NovoProduto />
@@ -70,6 +72,9 @@ export function AppRoutes() {
           <ProtectedRoute routeType={"admin"} path="/admin/novo">
             <NovoAdmin />
           </ProtectedRoute>
+          <Route path="/produto/:id">
+            <Produto />
+          </Route>
           <Route path="/">
             <Home />
           </Route>
