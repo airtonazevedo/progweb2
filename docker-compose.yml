@@ -15,7 +15,7 @@ services:
     build:
       context: ./frontend
     ports:
-      - 3366:3366
+      - 3021:3366
     volumes:
       - ./frontend:/usr/app
   db:
